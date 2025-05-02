@@ -6,7 +6,7 @@ import Weather from './components/Weather/Weather'
 export default function App() {
   return (
     <div id="app">
-      <Weather />
+      <Weather defaultCity='Lisbon'/>
     </div>
   )
 }
