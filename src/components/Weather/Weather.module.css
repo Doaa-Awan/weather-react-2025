@@ -29,3 +29,8 @@ h1 {
 .tempContainer .description {
     text-transform: capitalize;
 }
+
+.inactiveUnit {
+    color: gray;
+    font-weight: 600;
+}

@@ -1,5 +1,6 @@
-import "tailwindcss";
+
 import styles from "./Weather.module.css";
+import WeatherDataTemp from "./WeatherDataTemp";
 
 export default function WeatherData(props) {
     return (
@@ -12,7 +13,7 @@ export default function WeatherData(props) {
                     alt={props.data.iconName}/>
                 </div>
                 <div>
-                    <div><span className="text-xl">{Math.round(props.data.temperature)}°</span> C | F</div>
+                    <WeatherDataTemp celsius={props.data.temperature} />
                     <span className={`${styles.description} text-l`}>{props.data.description}</span>
                 </div>
             </div>

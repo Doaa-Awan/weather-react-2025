@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+.app {
+    border: 1px solid gray;
+    border-radius: 8px;
+    max-width: 380px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
 p {
     margin: 0;
 }
