@@ -1,4 +1,4 @@
-// import "@tailwindcss/vite";
+import "tailwindcss";
 import styles from "./Weather.module.css";
 
 export default function WeatherData(props) {
@@ -6,11 +6,14 @@ export default function WeatherData(props) {
         <div className={`${styles.weatherData}`}>
             <h1>{props.data.city}</h1>
             <p className={styles.date}>{props.data.date}</p>
-            <div className={`${styles.tempContainer} grid grid-cols-2 gap-4`}>
-                <img src={props.data.iconUrl} alt={props.data.iconName}/>
+            <div className={`${styles.tempContainer} grid grid-cols-[30%_70%]`}>
+                <div className="">
+                    <img src={props.data.iconUrl} 
+                    alt={props.data.iconName}/>
+                </div>
                 <div>
-                    <div>{Math.round(props.data.temperature)}° Celsius</div>
-                    <span className={styles.description}>{props.data.description}</span>
+                    <div><span className="text-xl">{Math.round(props.data.temperature)}°</span> C | F</div>
+                    <span className={`${styles.description} text-l`}>{props.data.description}</span>
                 </div>
             </div>
             <p>Humidity: {props.data.humidity}</p>
