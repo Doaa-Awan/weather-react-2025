@@ -17,14 +17,14 @@ export default function WeatherDataTemp(props) {
     if (unit === "celsius") {
         return (
             <div className="weatherDataTemp">
-                <span className="text-xl">{Math.round(props.celsius)}°</span> C <a href="/" onClick={convertToFahrenheit} className={styles.inactiveUnit}>| F</a> 
+                <span className={styles.tempNumber}>{Math.round(props.celsius)}°</span> C <a href="/" onClick={convertToFahrenheit} className={styles.inactiveUnit}>| F</a> 
             </div>
         );
     } else {
         let fahrenheit = (props.celsius * 9) / 5 + 32;
         return (
             <div className="weatherDataTemp">
-                <span className="text-xl">{Math.round(fahrenheit)}°</span> F <a href="/" onClick={convertToCelsius} className={styles.inactiveUnit}>| C</a>
+                <span className={styles.tempNumber}>{Math.round(fahrenheit)}°</span> F <a href="/" onClick={convertToCelsius} className={styles.inactiveUnit}>| C</a>
             </div>
         );
     }

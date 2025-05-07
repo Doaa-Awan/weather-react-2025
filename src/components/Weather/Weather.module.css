@@ -22,15 +22,39 @@ h1 {
     border-radius: 8px;
     background-color: #1a1a1a;
     margin-bottom: 2rem;
-    max-width: 410px;
-    padding: 0;
+    /* max-width: 330px; */
+    width: 100%;
+
+    /* padding: 0 20px 5px 0; */
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    width: 100px;
 }
 
 .tempContainer .description {
     text-transform: capitalize;
+    font-size: 0.9rem;
+    position: relative;
+    top: -1.2rem;
+    text-align: center;
+    padding: 5px;
+}
+
+.tempNumber {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-left: 10px;
 }
 
 .inactiveUnit {
     color: gray;
     font-weight: 600;
+}
+
+.day {
+    /* border: 1px solid red; */
+    text-align: center;
 }
