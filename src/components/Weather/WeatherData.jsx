@@ -2,24 +2,27 @@
 import styles from "./Weather.module.css";
 import WeatherDataTemp from "./WeatherDataTemp";
 import WeatherForecast from "./WeatherForecast";
+import { WeatherContext } from "../../Context";
+import { useContext } from "react";
 
-export default function WeatherData(props) {
+export default function WeatherData() {
+    const data = useContext(WeatherContext);
     return (
         <div className={`${styles.weatherData}`}>
-            <h1>{props.data.city}</h1>
-            <p className={styles.date}>{props.data.date}</p>
+            <h1>{data.city}</h1>
+            <p className={styles.date}>{data.date}</p>
             <div className={`${styles.tempContainer} `}>
                 <div className="">
-                    <img src={props.data.iconUrl} 
-                    alt={props.data.iconName}/>
-                    <div className={`${styles.description} text-l`}>{props.data.description}</div>
+                    <img src={data.iconUrl} 
+                    alt={data.iconName}/>
+                    <div className={`${styles.description} text-l`}>{data.description}</div>
                 </div>
-                <WeatherDataTemp celsius={props.data.temperature} />
+                <WeatherDataTemp />
             </div>
-            <p>Humidity: {props.data.humidity}</p>
-            <p>Wind: {props.data.wind}</p>
+            <p>Humidity: {data.humidity}</p>
+            <p>Wind: {data.wind}</p>
             <br/>
-            <WeatherForecast city={props.data.city} />
+            <WeatherForecast />
         </div>
     );
 }

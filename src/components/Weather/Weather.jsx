@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import WeatherData from "./WeatherData";
+import { WeatherContext } from "../../Context";
 
 export default function Weather(props){
     const [weatherData, setWeatherData] = useState({ready: false});
     const [city, setCity] = useState(props.defaultCity);
+    const [unit, setUnit] = useState("celsius");
     function handleResponse(response){
         setWeatherData({
             ready: true,
@@ -52,7 +54,9 @@ export default function Weather(props){
                     />
                     <input type="submit" value="Search"/>
                 </form>
-                <WeatherData data={weatherData} />
+                <WeatherContext.Provider value={{...weatherData, unit, setUnit}}>
+                    <WeatherData />
+                </WeatherContext.Provider>
             </section>
         );
     } else {
