@@ -1,11 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import WeatherData from "./WeatherData";
 import { WeatherContext } from "../../Context";
 
 export default function Weather(props){
     const [weatherData, setWeatherData] = useState({ready: false});
-    const [city, setCity] = useState(props.defaultCity);
+    const [city, setCity] = useState(() => {
+        // Check localStorage for the last searched city, otherwise use props.defaultCity
+        return localStorage.getItem("lastSearchedCity") || props.defaultCity;
+    });
     const [unit, setUnit] = useState("celsius");
     function handleResponse(response){
         setWeatherData({
@@ -33,13 +36,29 @@ export default function Weather(props){
         const key = import.meta.env.VITE_API_KEY;
         const units = "metric";
         const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${key}&units=${units}`;
-        axios.get(apiUrl).then(handleResponse);
+        axios
+            .get(apiUrl)
+            .then(handleResponse)
+            .catch((error) => {
+                if (error.response && error.response.status === 429) {
+                    console.error("Rate limit exceeded. Please try again later.");
+                } else {
+                    console.error("An error occurred:", error.message);
+                }
+        });
     }
 
     function handleSubmit(event){
         event.preventDefault();
+        // Save the city to localStorage
+        localStorage.setItem("lastSearchedCity", city);
         search();
     }
+
+     useEffect(() => {
+        // Automatically search for the city when the component loads
+        search();
+    }, []); // Empty dependency array ensures this runs only once
     
     if(weatherData.ready){
         return (
@@ -50,6 +69,7 @@ export default function Weather(props){
                         placeholder="Enter a city..." 
                         className=""
                         autoFocus="on"
+                        // value={city}
                         onChange={(event) => setCity(event.target.value)}
                     />
                     <input type="submit" value="Search"/>
@@ -60,7 +80,6 @@ export default function Weather(props){
             </section>
         );
     } else {
-        search();
         return 'Loading...';
     }
 }
