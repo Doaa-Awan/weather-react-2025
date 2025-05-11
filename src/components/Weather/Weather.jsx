@@ -15,25 +15,36 @@ export default function Weather(props){
     });
     const [unit, setUnit] = useState("celsius");
     function handleResponse(response){
-        setWeatherData({
-            ready: true,
-            city: response.data.city,
-            temperature: response.data.temperature.current,
-            description: response.data.condition.description,
-            iconUrl: response.data.condition.icon_url,
-            iconName: response.data.condition.icon,
-            humidity: response.data.temperature.humidity,
-            wind: response.data.wind.speed,
-            date: new Date(response.data.time * 1000).toLocaleDateString("en-US", {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true
-            })
-        });
+        try {
+            if(response.data.status == "not_found"){    
+                alert("City not found");
+                localStorage.removeItem("lastSearchedCity");
+            }
+            else {
+                setWeatherData({
+                    ready: true,
+                    city: response.data.city,
+                    temperature: response.data.temperature.current,
+                    description: response.data.condition.description,
+                    iconUrl: response.data.condition.icon_url,
+                    iconName: response.data.condition.icon,
+                    humidity: response.data.temperature.humidity,
+                    wind: response.data.wind.speed,
+                    date: new Date(response.data.time * 1000).toLocaleDateString("en-US", {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: '2-digit',
+                        hour12: true
+                    })
+                });
+            }
+        }
+        catch (error) {
+            console.log("error", error);
+        }
     };
 
     function search(){
