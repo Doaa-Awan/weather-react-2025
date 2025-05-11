@@ -12,7 +12,7 @@ h1 {
 .date {
   font-size: 1rem;
   margin-bottom: 1rem;
-  color: gray;
+  color: var(--date-color);
 }
 
 .tempContainer {
@@ -20,12 +20,9 @@ h1 {
     align-items: center;
     margin-top: 1rem;
     border-radius: 8px;
-    background-color: #1a1a1a;
-    margin-bottom: 2rem;
-    /* max-width: 330px; */
+    background-color: var(--temp-container-bg);
+    margin-bottom: 1rem;
     width: 100%;
-
-    /* padding: 0 20px 5px 0; */
     display: flex;
     justify-content: center;
 }
@@ -54,7 +51,17 @@ img {
     font-weight: 600;
 }
 
+.info{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 0 20px;
+}
+
 .day {
-    /* border: 1px solid red; */
     text-align: center;
+}
+
+.forecastMinTemp {
+    color: gray;
 }

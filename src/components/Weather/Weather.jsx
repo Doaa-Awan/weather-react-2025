@@ -1,9 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import WeatherData from "./WeatherData";
-import { WeatherContext } from "../../Context";
+import { WeatherContext, useTheme } from "../../Context";
+import sun from "/src/assets/sun.png";
+import moon from "/src/assets/moon.png";
 
 export default function Weather(props){
+    const { theme, toggleTheme } = useTheme(); // Use the custom hook to access theme and toggleTheme
+    const themeIcon = theme === "dark" ? sun : moon; // Change icon based on theme
     const [weatherData, setWeatherData] = useState({ready: false});
     const [city, setCity] = useState(() => {
         // Check localStorage for the last searched city, otherwise use props.defaultCity
@@ -63,16 +67,19 @@ export default function Weather(props){
     if(weatherData.ready){
         return (
             <section className="weather">
+                <div>
+                    <img className="darkModeIcon" src={themeIcon} alt="" onClick={toggleTheme}/>
+                </div>
                 <form onSubmit={handleSubmit}>
                     <input 
                         type="search"
                         placeholder="Enter a city..." 
-                        className=""
+                        className="searchBar"
                         autoFocus="on"
                         // value={city}
                         onChange={(event) => setCity(event.target.value)}
                     />
-                    <input type="submit" value="Search"/>
+                    <input type="submit" className="btnSearch" value="Search"/>
                 </form>
                 <WeatherContext.Provider value={{...weatherData, unit, setUnit}}>
                     <WeatherData />

@@ -9,3 +9,40 @@
 p {
     margin: 0;
 }
+
+.darkModeIcon{
+    max-width: 100%;
+    width: 30px;
+    float: right;
+    cursor: pointer;
+}
+
+.searchBar{
+    border: 1px solid lightgray;
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin-right: 15px;
+    width: 60%;
+    text-transform: capitalize;
+}
+
+.searchBar::placeholder{
+    text-transform: lowercase;
+    color: gray;
+}
+
+.btnSearch {
+    border: 1px solid darkgray;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: var(--btn-search-bg);
+    cursor: pointer;
+    /* transition: all 0.1s ease-in-out; */
+    color: var(--btn-text-color);
+}
+
+.btnSearch:hover {
+    background-color: var(--btn-search-hover-bg);
+}
+

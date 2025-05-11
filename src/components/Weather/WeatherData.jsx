@@ -19,8 +19,10 @@ export default function WeatherData() {
                 </div>
                 <WeatherDataTemp />
             </div>
-            <p>Humidity: {data.humidity}</p>
-            <p>Wind: {data.wind}</p>
+            <div className={styles.info}>
+                <p>Humidity: {data.humidity}</p>
+                <p>Wind: {data.wind}</p>
+            </div>
             <br/>
             <WeatherForecast />
         </div>
