@@ -24,6 +24,7 @@ export default function Weather(props){
                 setWeatherData({
                     ready: true,
                     city: response.data.city,
+                    country: response.data.country,
                     temperature: response.data.temperature.current,
                     description: response.data.condition.description,
                     iconUrl: response.data.condition.icon_url,
@@ -74,26 +75,36 @@ export default function Weather(props){
         // Automatically search for the city when the component loads
         search();
     }, []); // Empty dependency array ensures this runs only once
+
+    function refreshWeather() {
+        // Use the last searched city from localStorage or fallback to current city state
+        const lastCity = localStorage.getItem("lastSearchedCity") || city;
+        setCity(lastCity);
+        search();
+        alert("Weather data refreshed");
+    }
     
     if(weatherData.ready){
         return (
             <section className="weather">
-                <div>
-                    <img className="darkModeIcon" src={themeIcon} alt="" onClick={toggleTheme}/>
+                <div className="searchContainer">
+                    <form onSubmit={handleSubmit}>
+                        <input 
+                            type="search"
+                            placeholder="Enter a city..." 
+                            className="searchBar"
+                            autoFocus="on"
+                            // value={city}
+                            onChange={(event) => setCity(event.target.value)}
+                        />
+                        <input type="submit" className="btnSearch" value="Search"/>
+                    </form>
+                    <div className="darkModeContainer">
+                        <img className="darkModeIcon" src={themeIcon} alt="" onClick={toggleTheme}/>
+                    </div>
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <input 
-                        type="search"
-                        placeholder="Enter a city..." 
-                        className="searchBar"
-                        autoFocus="on"
-                        // value={city}
-                        onChange={(event) => setCity(event.target.value)}
-                    />
-                    <input type="submit" className="btnSearch" value="Search"/>
-                </form>
                 <WeatherContext.Provider value={{...weatherData, unit, setUnit}}>
-                    <WeatherData />
+                    <WeatherData onRefresh={refreshWeather} />
                 </WeatherContext.Provider>
             </section>
         );

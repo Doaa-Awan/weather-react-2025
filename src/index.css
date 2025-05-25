@@ -9,17 +9,17 @@
 }
 
 [data-theme="light"] {
-    --background-color: #fafafa;
+    --background-color: #e4e5f1;
     --text-color: #484b6a;
     --date-color: #9394a5;
     --btn-text-color: white;
-    --temp-container-bg: #e4e5f1;
+    --temp-container-bg: #d0d3f2;
     --btn-search-bg: #646cff;
     --btn-search-hover-bg: rgba(100, 108, 255, 0.801);
 }
 
 body {
-    padding: 60px;
+    padding: 35px 25px;
     background-color: var(--background-color);
     color: var(--text-color);
 }
