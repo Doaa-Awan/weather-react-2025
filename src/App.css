@@ -18,8 +18,9 @@ p {
 }
 
 .darkModeIcon{
-    width: 25px;
+    width: 30px;
     cursor: pointer;
+    margin: 0 15px;
 }
 
 form {

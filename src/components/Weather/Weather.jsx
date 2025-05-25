@@ -4,6 +4,7 @@ import WeatherData from "./WeatherData";
 import { WeatherContext, useTheme } from "../../Context";
 import sun from "/src/assets/sun.png";
 import moon from "/src/assets/moon.png";
+import { Slide, ToastContainer, toast } from "react-toastify";
 
 export default function Weather(props){
     const { theme, toggleTheme } = useTheme(); // Use the custom hook to access theme and toggleTheme
@@ -17,7 +18,7 @@ export default function Weather(props){
     function handleResponse(response){
         try {
             if(response.data.status == "not_found"){    
-                alert("City not found");
+                toast.error("City not found", {pauseOnHover: false, transition: Slide });
                 localStorage.removeItem("lastSearchedCity");
             }
             else {
@@ -81,12 +82,13 @@ export default function Weather(props){
         const lastCity = localStorage.getItem("lastSearchedCity") || city;
         setCity(lastCity);
         search();
-        alert("Weather data refreshed");
+        toast.success("Refreshed", {pauseOnHover: false, autoClose: 1000, hideProgressBar: false, transition: Slide });
     }
     
     if(weatherData.ready){
         return (
             <section className="weather">
+                <ToastContainer theme={theme} position="bottom-right"/>
                 <div className="searchContainer">
                     <form onSubmit={handleSubmit}>
                         <input 
