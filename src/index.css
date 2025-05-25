@@ -19,7 +19,8 @@
 }
 
 body {
-    padding: 30px 20px;
+    padding: 25px 20px;
     background-color: var(--background-color);
     color: var(--text-color);
+    height: 100vh;
 }
